@@ -79,6 +79,70 @@ And
 //         }
 ```
 
+### Create Controllers
+1. Create Controllers/CustomersControllers.cs
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using labfix.netcore.api.mssql.Models;
+using System.Text;
+
+namespace labfix.netcore.api.mssql.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+
+    public class CustomersController : ControllerBase
+    {
+      // Method
+    }
+}
+```
+
+2. Add method for connection into EF and Database Models
+```
+      // Method
+       private NORTHWNDContext _dbContext;
+       public CustomersController(NORTHWNDContext dbContext){
+         _dbContext = dbContext;
+       }
+```
+
+3. Add method GET Customer
+```
+      // GET api/customers
+      [HttpGet]
+      public IActionResult Customers(){
+        var customers = _dbContext.Customers.ToList();
+        return Ok(customers);
+      }
+```
+You can view data from url https://localhost:5001/api/customers
+
+4. Add method POST Customer
+```
+      // POST api/customers
+      [HttpPost]
+      public IActionResult Customers(Customers customers){
+
+        if( ModelState.IsValid ){
+
+          customers.CustomerId = GenerateAutoId(4);
+          _dbContext.Customers.Add(customers);
+          _dbContext.SaveChanges();
+
+          return Ok();
+        }else{
+          return NotFound();
+        }
+
+      }
+```
+and use Postman for test POST api https://localhost:5001/api/customers
+
 ## Reference
 
 ### Entity Framework Core tools reference - .NET CLI
