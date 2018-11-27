@@ -1,0 +1,13 @@
+version: "3"
+services:
+    mssql:
+      container_name: mssql
+      image: microsoft/mssql-server-linux
+      restart: always
+      environment:
+        - "ACCEPT_EULA=Y"
+        - "SA_PASSWORD=Zxcv123!"
+      ports:
+        - 1433:1433
+      volumes:
+        - "./backup:/var/opt/mssql/backup"
