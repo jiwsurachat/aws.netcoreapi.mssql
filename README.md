@@ -3,7 +3,7 @@ https://gitlab.com/jiw.surachat/labfix.netcore.stringapi.git
 
 ### Install Package
 ```
-$ cd LabFix.NetcoreMVC
+$ cd labfix.netcore.api.mssql
 $ dotnet add . package Microsoft.AspNetCore.Mvc.TagHelpers
 $ dotnet add . package Microsoft.EntityFrameworkCore
 $ dotnet add . package NewtonSoft.Json
@@ -28,7 +28,7 @@ OR
 
 The following example scaffolds only selected tables and creates the context in a separate folder with a specified name:
 ```
-$ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext
+$ dotnet ef dbcontext scaffold "Server=localhost;User ID=web;Password=Zxcv123!;Database=NORTHWND;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext
 
 $ dotnet build
 ```
