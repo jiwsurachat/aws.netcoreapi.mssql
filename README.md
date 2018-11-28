@@ -204,6 +204,19 @@ in Postman use PUT method https://localhost:5001/api/customers/AJML
 6. DELETE
 ```
 
+  [HttpDelete("{id}")]
+  public IActionResult Customers(string id){
+
+    var _customers = _dbContext.Customers.FirstOrDefault(m => m.CustomerId == id);
+
+    if(_customers == null){ return NotFound();}
+
+    _dbContext.Customers.Remove(_customers);
+    _dbContext.SaveChanges();
+
+    return Ok();
+
+  }
 ```
 
 ### Trick Generate Customers ID from Random.
