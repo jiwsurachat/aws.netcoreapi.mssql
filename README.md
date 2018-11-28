@@ -142,9 +142,9 @@ You can view data from url https://localhost:5001/api/customers
       }
 ```
 and use Postman for test POST api https://localhost:5001/api/customers
-```
-> Postman > select method "POST" >select "raw " >select type "application/json"
 
+Postman > select method "POST" >select "raw " >select type "application/json"
+```
 {
   "customerId": "ALFKI",
   "companyName": "LabFix",
@@ -158,8 +158,54 @@ and use Postman for test POST api https://localhost:5001/api/customers
   "phone": "087-8647779",
   "fax": "087-8647779"
 }
+```
+5. UPDATE
 
 ```
+      // PUT /api/customer/{id} ==> Update
+      [HttpPut("{id}")]
+      public IActionResult Customers(string id, Customers customers){
+        //Get object for update.
+        var _customers = _dbContext.Customers.FirstOrDefault( m => m.CustomerId == id);
+
+        if(_customers == null ){return NotFound(); }
+
+        if(ModelState.IsValid){
+          _customers.ContactName = customers.ContactName;
+          _customers.CompanyName = customers.CompanyName;
+          _customers.ContactName = customers.ContactName;
+          _customers.ContactTitle = customers.ContactTitle;
+          _customers.PostalCode = customers.PostalCode;
+          _customers.Country = customers.Country;
+
+          _dbContext.Customers.Update(_customers);
+          _dbContext.SaveChanges();
+
+          return NoContent();
+
+        }else{
+          return NotFound();
+        }
+
+      }
+```
+in Postman use PUT method https://localhost:5001/api/customers/AJML
+
+```
+{
+    "customerId": "AJML",
+    "companyName": "XXX Company",
+    "contactName": "YYY ZZZ[X]",
+    "contactTitle": "System Engineer",
+    "postalCode": "10250",
+    "country": "Thailand"
+}
+```
+6. DELETE
+```
+
+```
+
 ### Trick Generate Customers ID from Random.
 ```
 public string GenerateAutoId(int length)

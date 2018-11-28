@@ -67,6 +67,20 @@ namespace labfix.netcore.api.mssql.Controllers
 
       }
 
+      [HttpDelete("{id}")]
+      public IActionResult Customers(string id){
+
+        var _customers = _dbContext.Customers.FirstOrDefault(m => m.CustomerId == id);
+
+        if(_customers == null){ return NotFound();}
+
+        _dbContext.Customers.Remove(_customers);
+        _dbContext.SaveChanges();
+
+        return Ok();
+
+      }
+
       public string GenerateAutoId(int length)
         {
             const string valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
