@@ -142,6 +142,38 @@ You can view data from url https://localhost:5001/api/customers
       }
 ```
 and use Postman for test POST api https://localhost:5001/api/customers
+```
+> Postman > select method "POST" >select "raw " >select type "application/json"
+
+{
+  "customerId": "ALFKI",
+  "companyName": "LabFix",
+  "contactName": "Surachat Boonsaen",
+  "contactTitle": "Sales Representative",
+  "address": "Obere Str. 57",
+  "city": "Berlin",
+  "region": null,
+  "postalCode": "12209",
+  "country": "Thailand",
+  "phone": "087-8647779",
+  "fax": "087-8647779"
+}
+
+```
+### Trick Generate Customers ID from Random.
+```
+public string GenerateAutoId(int length)
+  {
+      const string valid = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+      StringBuilder res = new StringBuilder();
+      Random rnd = new Random();
+      while (0 < length--)
+      {
+          res.Append(valid[rnd.Next(valid.Length)]);
+      }
+      return res.ToString();
+  }
+```
 
 ## Reference
 
@@ -150,6 +182,9 @@ https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
 
 ### Getting Started with EF Core on ASP.NET Core with an Existing Database
 https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db
+
+### CRUD operations
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1
 
 ### Work with SQL Server LocalDB and ASP.NET Core
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/sql?view=aspnetcore-2.1

@@ -18,14 +18,14 @@ namespace labfix.netcore.api.mssql.Controllers
          _dbContext = dbContext;
        }
 
-      // GET api/customers
+      // GET api/customers ==>  Select
       [HttpGet]
       public IActionResult Customers(){
         var customers = _dbContext.Customers.ToList();
         return Ok(customers);
       }
 
-      // POST api/customers
+      // POST api/customers ==> Insert
       [HttpPost]
       public IActionResult Customers(Customers customers){
 
@@ -36,6 +36,31 @@ namespace labfix.netcore.api.mssql.Controllers
           _dbContext.SaveChanges();
 
           return Ok();
+        }else{
+          return NotFound();
+        }
+
+      }
+
+      // PUT /api/customer/{id} ==> Update
+      [HttpPut("{id}")]
+      public IActionResult Customers(string id, Customers customers){
+        var _customers = _dbContext.Customers.FirstOrDefault( m => m.CustomerId == id);
+        if(_customers == null ){return NotFound(); }
+
+        if(ModelState.IsValid){
+          _customers.ContactName = customers.ContactName;
+          _customers.CompanyName = customers.CompanyName;
+          _customers.ContactName = customers.ContactName;
+          _customers.ContactTitle = customers.ContactTitle;
+          _customers.PostalCode = customers.PostalCode;
+          _customers.Country = customers.Country;
+
+          _dbContext.Customers.Update(_customers);
+          _dbContext.SaveChanges();
+
+          return NoContent();
+
         }else{
           return NotFound();
         }
