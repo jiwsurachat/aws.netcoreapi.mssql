@@ -1,0 +1,23 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: <TASK_DEFINITION>
+        LoadBalancerInfo:
+          ContainerName: "netcoreapi"
+          ContainerPort: 80
+# Optional properties
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+            AwsvpcConfiguration:
+              Subnets: ["subnet-06d0ca21f30f38fd5","subnet-03ece4cd8bfd1a2f8","subnet-0087fe8fbe5605596"]
+              SecurityGroups: ["sg-07ffd5c00f1c9d06f"]
+              #AssignPublicIp: "ENABLED"
+              AssignPublicIp: "DISABLED"
+# Hooks:
+# - BeforeInstall: "BeforeInstallHookFunctionName"
+# - AfterInstall: "AfterInstallHookFunctionName"
+# - AfterAllowTestTraffic: "AfterAllowTestTrafficHookFunctionName"
+# - BeforeAllowTraffic: "BeforeAllowTrafficHookFunctionName"
+# - AfterAllowTraffic: "AfterAllowTrafficHookFunctionName"

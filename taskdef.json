@@ -1,0 +1,24 @@
+{
+    "executionRoleArn": "arn:aws:iam::482126180425:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "netcoreapi",
+            "image": "482126180425.dkr.ecr.us-west-2.amazonaws.com/nginx:latest",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "containerPort": 80
+                }
+            ]
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "family": "netcoreapi"
+}

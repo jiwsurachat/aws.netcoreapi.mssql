@@ -1,0 +1,30 @@
+{
+    "taskDefinition": "netcoreapi:1",
+    "cluster": "jiw",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:482126180425:targetgroup/netcoreapi-tg-1/95afcff4099f9564",
+            "containerName": "netcoreapi",
+            "containerPort": 80
+        }
+    ],
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "CODE_DEPLOY"
+    },
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                "subnet-06d0ca21f30f38fd5",
+                "subnet-03ece4cd8bfd1a2f8",
+                "subnet-0087fe8fbe5605596"
+            ],
+            "securityGroups": [
+                "sg-07ffd5c00f1c9d06f"
+            ],
+            "assignPublicIp": "DISABLED"
+        }
+    }
+}
