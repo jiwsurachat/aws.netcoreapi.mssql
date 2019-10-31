@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "netcoreapi",
-            "image": "482126180425.dkr.ecr.us-west-2.amazonaws.com/nginx:latest",
+            "image": "482126180425.dkr.ecr.us-west-2.amazonaws.com/netcoreapi:latest",
             "essential": true,
             "portMappings": [
                 {
